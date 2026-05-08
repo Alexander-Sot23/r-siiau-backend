@@ -2,6 +2,6 @@ target
 .git
 .gitignore
 README.md
+*.log
 .dockerignore
 Dockerfile
-*.log
