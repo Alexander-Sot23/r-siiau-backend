@@ -20,7 +20,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -41,19 +47,19 @@ public class SecurityConfiguration {
                     //Permitir OPTIONS para todos los endpoints
                     registry.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
-                    //Rutas públicas
-                    registry.requestMatchers("/api/login/**").permitAll();
+                    // Rutas públicas
+                    registry.requestMatchers("/api/login/**", "/api/logout").permitAll();
 
-                    //Rutas de student
+                    // Rutas de student
                     registry.requestMatchers("/api/student/**").hasAnyRole("ADMIN","TEACHER","STUDENT");
 
-                    //Rutas de teacher
+                    // Rutas de teacher
                     registry.requestMatchers("/api/teacher/**").hasAnyRole("TEACHER","ADMIN");
 
-                    //Rutas de administrador
+                    // Rutas de administrador
                     registry.requestMatchers("/api/admin/**").hasRole("ADMIN");
 
-                    //Aseguramos que todas las demás rutas esten protegidas
+                    // Aseguramos que todas las demás rutas esten protegidas
                     registry.anyRequest().authenticated();
                 })
                 .formLogin(form -> form.disable())
@@ -72,7 +78,7 @@ public class SecurityConfiguration {
                 "http://localhost:[*]",
                 "http://127.0.0.1:[*]",
                 "http://192.168.*.*:[*]",
-                "https://r-siiau.onrender.com"
+                "https://compstock-c3qo.onrender.com"
         ));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
