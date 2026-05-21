@@ -78,7 +78,7 @@ public class SecurityConfiguration {
                 "http://localhost:[*]",
                 "http://127.0.0.1:[*]",
                 "http://192.168.*.*:[*]",
-                "https://compstock-c3qo.onrender.com"
+                "https://r-siiau.onrender.com"
         ));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
